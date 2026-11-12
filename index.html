@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Apple</title>
+    <meta name="theme-color" content="#000000">
+    <style>
+        :root {
+            --bg-color: #000000;
+            --text-primary: #f5f5f7;
+            --text-secondary: #86868b;
+            --nav-bg: rgba(0, 0, 0, 0.8);
+            --box-bg: #161617;
+            --link-blue: #2997ff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        html {
+            background: var(--bg-color);
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            overflow-x: hidden;
+        }
+
+        /* Apple Global Navigation Bar */
+        nav.apple-global-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 48px;
+            background: var(--nav-bg);
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 36px;
+            z-index: 9999;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        nav.apple-global-nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 400;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        nav.apple-global-nav a:hover {
+            opacity: 1;
+            color: var(--text-primary);
+        }
+
+        .apple-logo {
+            font-size: 16px;
+        }
+
+        /* Hero Product Sections */
+        .hero-section {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            text-align: center;
+            padding-top: 85px;
+            position: relative;
+            background-color: #000000;
+            overflow: hidden;
+            border-bottom: 12px solid #000;
+        }
+
+        .hero-section.light-bg {
+            background-color: #f5f5f7;
+            color: #1d1d1f;
+        }
+
+        .hero-section.light-bg .product-title-sm, 
+        .hero-section.light-bg .product-desc {
+            color: #515154;
+        }
+
+        .hero-section.light-bg .product-title-lg {
+            background: none;
+            -webkit-text-fill-color: #1d1d1f;
+        }
+
+        .product-title-sm {
+            font-size: 21px;
+            font-weight: 400;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+            letter-spacing: -0.01em;
+        }
+
+        .product-title-lg {
+            font-size: 56px;
+            font-weight: 700;
+            letter-spacing: -0.015em;
+            margin-bottom: 8px;
+            background: linear-gradient(180deg, #ffffff 0%, #a1a1a6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .product-desc {
+            font-size: 21px;
+            color: var(--text-secondary);
+            max-width: 600px;
+            font-weight: 400;
+            line-height: 1.4;
+            margin-bottom: 20px;
+        }
+
+        .cta-row {
+            display: flex;
+            gap: 24px;
+            z-index: 2;
+        }
+
+        .cta-link {
+            color: var(--link-blue);
+            text-decoration: none;
+            font-size: 17px;
+            font-weight: 400;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            transition: opacity 0.2s ease;
+        }
+
+        .cta-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Apple Bento Grid 2x2 */
+        .bento-grid {
+            width: 100%;
+            max-width: 100%;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            padding: 0 12px 12px 12px;
+        }
+
+        .bento-item {
+            background-color: var(--box-bg);
+            height: 580px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding-top: 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bento-item h3 {
+            font-size: 40px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            letter-spacing: -0.005em;
+        }
+
+        .bento-item p {
+            font-size: 19px;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        /* Apple Legal Footer */
+        footer.apple-footer {
+            background-color: #000000;
+            color: var(--text-secondary);
+            padding: 20px max(22px, env(safe-area-inset-left)) 40px;
+            font-size: 12px;
+            line-height: 1.5;
+            max-width: 1024px;
+            margin: 0 auto;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        footer.apple-footer p {
+            margin-bottom: 12px;
+        }
+
+        footer.apple-footer .footer-links {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 12px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 768px) {
+            .bento-grid {
+                grid-template-columns: 1fr;
+            }
+            .product-title-lg {
+                font-size: 40px;
+            }
+            .hero-section {
+                padding-top: 70px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. Apple Global Nav -->
+    <nav class="apple-global-nav">
+        <a href="#" class="apple-logo"></a>
+        <a href="#">Store</a>
+        <a href="#">Mac</a>
+        <a href="#">iPad</a>
+        <a href="#">iPhone</a>
+        <a href="#">Watch</a>
+        <a href="#">Vision</a>
+        <a href="#">AirPods</a>
+        <a href="#">TV & Home</a>
+        <a href="#">Entertainment</a>
+        <a href="#">Accessories</a>
+        <a href="#">Support</a>
+    </nav>
+
+    <!-- 2. Hero 1: iPhone -->
+    <section class="hero-section">
+        <div class="product-title-sm">iPhone 17 Pro</div>
+        <div class="product-title-lg">Titanium. So strong. So light. So Pro.</div>
+        <p class="product-desc">Experience the pinnacle of mobile design and aerospace engineering.</p>
+        <div class="cta-row">
+            <a href="#" class="cta-link">Learn more &gt;</a>
+            <a href="#" class="cta-link">Buy &gt;</a>
+        </div>
+    </section>
+
+    <!-- 3. Hero 2: iPhone Light -->
+    <section class="hero-section light-bg">
+        <div class="product-title-sm">iPhone 17</div>
+        <div class="product-title-lg" style="background:none; -webkit-text-fill-color:#1d1d1f;">A camera that's all kinds of magic.</div>
+        <p class="product-desc">Meet the new standard for brilliance, battery, and capability.</p>
+        <div class="cta-row">
+            <a href="#" class="cta-link">Learn more &gt;</a>
+            <a href="#" class="cta-link">Buy &gt;</a>
+        </div>
+    </section>
+
+    <!-- 4. Hero 3: iPad Pro -->
+    <section class="hero-section" style="background-color: #0b0b0c;">
+        <div class="product-title-sm">iPad Pro</div>
+        <div class="product-title-lg">Thinpossible.</div>
+        <p class="product-desc">The ultimate iPad experience with the world's most advanced Ultra Retina XDR display.</p>
+        <div class="cta-row">
+            <a href="#" class="cta-link">Learn more &gt;</a>
+            <a href="#" class="cta-link">Buy &gt;</a>
+        </div>
+    </section>
+
+    <!-- 5. Bento Grid -->
+    <div class="bento-grid">
+        <div class="bento-item">
+            <h3>MacBook Air</h3>
+            <p>Lean. Mean. M3 machine.</p>
+            <div class="cta-row">
+                <a href="#" class="cta-link">Learn more &gt;</a>
+                <a href="#" class="cta-link">Buy &gt;</a>
+            </div>
+        </div>
+        <div class="bento-item">
+            <h3>Apple Watch Series 10</h3>
+            <p>Thinstant classic.</p>
+            <div class="cta-row">
+                <a href="#" class="cta-link">Learn more &gt;</a>
+                <a href="#" class="cta-link">Buy &gt;</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 6. Apple Footer -->
+    <footer class="apple-footer">
+        <p>1. Trade-in values will vary based on the condition, year, and configuration of your eligible trade-in device. Not all devices are eligible for credit.</p>
+        <div class="footer-links">
+            <span>Copyright © 2026 Apple Inc. All rights reserved.</span>
+            <span>United States</span>
+        </div>
+    </footer>
+
+</body>
+</html>
