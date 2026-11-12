@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>T0R1NTO — Official Ecosystem</title>
+    <meta name="theme-color" content="#000000">
+    <style>
+        :root {
+            --bg-color: #000000;
+            --text-primary: #f5f5f7;
+            --text-secondary: #86868b;
+            --surface: rgba(255, 255, 255, 0.04);
+            --surface-hover: rgba(255, 255, 255, 0.08);
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        html {
+            background: var(--bg-color);
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            overflow-x: hidden;
+        }
+
+        /* شريط أبل العلوي السينمائي */
+        nav.apple-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 48px;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 24px;
+            z-index: 10000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        .nav-logo-img {
+            width: 22px;
+            height: 22px;
+            object-fit: contain;
+            filter: drop-shadow(0 0 5px rgba(255, 59, 48, 0.6));
+        }
+
+        .nav-status {
+            font-size: 11px;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .status-dot {
+            width: 5px;
+            height: 5px;
+            background-color: #30d158;
+            border-radius: 50%;
+            box-shadow: 0 0 6px #30d158;
+        }
+
+        /* أقسام العرض السينمائي */
+        .hero-section {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            position: relative;
+            background-color: #000000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        /* النافذة المنبثقة الزجاجية */
+        .popup-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 36px;
+            padding: 50px 30px;
+            max-width: 520px;
+            width: 100%;
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            opacity: 0;
+            transform: translateY(60px) scale(0.95);
+            transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* أول قسم يظهر فوراً بدون الحاجة للتمرير */
+        .hero-section.first-hero .popup-card,
+        .hero-section.visible .popup-card {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .platform-icon-box {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 20px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+        }
+
+        .platform-icon-box svg {
+            width: 32px;
+            height: 32px;
+            fill: currentColor;
+        }
+
+        .platform-subtitle {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .platform-title {
+            font-size: 38px;
+            font-weight: 700;
+            letter-spacing: -0.015em;
+            margin-bottom: 12px;
+            background: linear-gradient(180deg, #ffffff 0%, #a1a1a6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .platform-desc {
+            font-size: 16px;
+            color: var(--text-secondary);
+            max-width: 400px;
+            margin: 0 auto 28px;
+            line-height: 1.5;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: #f5f5f7;
+            color: #000000;
+            padding: 12px 28px;
+            border-radius: 30px;
+            font-size: 15px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(255,255,255,0.15);
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+            background-color: #ffffff;
+            box-shadow: 0 15px 35px rgba(255,255,255,0.25);
+        }
+
+        /* ألوان الأيقونات */
+        .color-yt { color: #f87171; }
+        .color-tg { color: #38bdf8; }
+        .color-wa { color: #4ade80; }
+        .color-ig { color: #f472b6; }
+        .color-tt { color: #ffffff; }
+        .color-sc { color: #facc15; }
+        .color-tw { color: #38bdf8; }
+        .color-kick { color: #4ade80; }
+
+        footer.site-footer {
+            background-color: #000000;
+            color: var(--text-secondary);
+            padding: 40px 20px;
+            font-size: 12px;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        @media (max-width: 768px) {
+            .popup-card { padding: 35px 20px; }
+            .platform-title { font-size: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- الشريط العلوي -->
+    <nav class="apple-nav">
+        <a href="#" class="nav-brand">
+            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 500'><path d='M100 120 C180 80, 320 80, 400 120 C350 160, 280 180, 250 200 C220 180, 150 160, 100 120 Z' fill='%23ff3b30'/><path d='M130 160 L230 160 L230 400 L180 350 L180 210 L130 160 Z' fill='%23ff3b30'/><path d='M250 200 L370 160 L320 210 L320 350 L270 400 L270 200 Z' fill='%23ffffff'/></svg>" alt="T0R1NTO" class="nav-logo-img">
+            <span>T0R1NTO</span>
+        </a>
+        <div class="nav-status">
+            <span class="status-dot"></span>
+            <span>Ecosystem Active</span>
+        </div>
+    </nav>
+
+    <!-- 1. YouTube (القسم الأول يظهر مباشرة عند فتح الصفحة) -->
+    <section class="hero-section first-hero" id="youtube">
+        <div class="popup-card">
+            <div class="platform-icon-box color-yt">
+                <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            </div>
+            <div class="platform-subtitle">YouTube</div>
+            <div class="platform-title">Video Hub</div>
+            <p class="platform-desc">Watch high-energy educational content, storytelling, and cinematic productions.</p>
+            <a href="vnd.youtube://" onclick="window.open('https://youtube.com/', '_blank')" class="cta-button">Open YouTube App</a>
+        </div>
+    </section>
+
+    <!-- 2. Telegram -->
+    <section class="hero-section" id="telegram">
+        <div class="popup-card">
+            <div class="platform-icon-box color-tg">
+                <svg viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+            </div>
+            <div class="platform-subtitle">Telegram</div>
+            <div class="platform-title">Official Channel</div>
+            <p class="platform-desc">Join the primary community hub for exclusive updates, discussions, and drops.</p>
+            <a href="tg://resolve?domain=F3F18" onclick="window.open('https://t.me/F3F18', '_blank')" class="cta-button">Open Telegram App</a>
+        </div>
+    </section>
+
+    <!-- 3. Instagram -->
+    <section class="hero-section" id="instagram">
+        <div class="popup-card">
+            <div class="platform-icon-box color-ig">
+                <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979
